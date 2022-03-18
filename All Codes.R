@@ -35,6 +35,99 @@ str(tractors)
 ### Key Crop Yields
 str(key_crop_yields)
 
+#Change column name 
+colnames(key_crop_yields)<- c("entity", "code", "year", "wheat(tpha)", "rice(tpha)","maize(tpha)","soybeans(tpha)","potatoes(tpha)", "beans(tpha)", "peas(tpha)", "cassava(tpha)","barley(tpha)","cocoa_beans(tpha)","bananas(tpha)")
+
+#Split into region and countries 
+key_crop_yields_region<- key_crop_yields%>%
+  filter(is.na(code))
+key_crop_yields_countries<- key_crop_yields%>%
+  filter(!is.na(code))
+
+##Plotting biofuel crops 
+ggplot(key_crop_yields_region, aes(year, `wheat(tpha)`))+
+  geom_line()+
+  facet_wrap(~entity) 
+
+key_crop_yields_region %>%
+  filter(entity == "Small island developing States") %>%
+  ggplot(aes(year, `wheat(tpha)`))+
+  geom_line()+
+  facet_wrap(~entity) 
+
+ggplot(key_crop_yields_region, aes(year, `soybeans(tpha)`))+
+  geom_line()+
+  facet_wrap(~entity) 
+
+key_crop_yields_countries%>%
+  filter(!is.na(`soybeans(tpha)`))%>%
+  ggplot(aes(year, `soybeans(tpha)`))+
+  geom_line()+
+  geom_vline(xintercept = 2004, color="blue")+
+  facet_wrap(~entity) 
+
+key_crop_yields_region %>%
+  filter(entity == "Small island developing States") %>%
+  ggplot(aes(year, `wheat(tpha)`))+
+  geom_line()+
+  facet_wrap(~entity) 
+
+key_crop_yields_countries%>%
+  filter(!is.na(`maize(tpha)`))%>%
+  ggplot(aes(year, `maize(tpha)`))+
+  geom_line()+
+  geom_vline(xintercept = 2004, color="blue")+
+  facet_wrap(~entity) 
+
+#Heatmap
+key_crop_yields_region%>%
+  filter(!is.na(`maize(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `maize(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
+key_crop_yields_countries%>%
+  filter(!is.na(`maize(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `maize(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
+key_crop_yields_region%>%
+  filter(!is.na(`soybeans(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `soybeans(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
+key_crop_yields_countries%>%
+  filter(!is.na(`soybeans(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `soybeans(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
+key_crop_yields_region%>%
+  filter(!is.na(`wheat(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `wheat(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
+key_crop_yields_countries%>%
+  filter(!is.na(`wheat(tpha)`))%>%
+  ggplot(aes(year, entity, fill = `wheat(tpha)`))+
+  geom_tile()+
+  geom_vline(xintercept = 1990, color = "red")+
+  geom_vline(xintercept = 2004, color = "red")+
+  scale_fill_viridis_c()
+
 
 ### Land Use
 str(land_use)
@@ -65,11 +158,11 @@ land_use_clean<-land_use%>%
 
 #More NA values 
 view(land_use_clean%>%
-  filter(is.na(code)))   #NA in tot_pop and code occurs for entities that are not countries, but a region/continent
+       filter(is.na(code)))   #NA in tot_pop and code occurs for entities that are not countries, but a region/continent
 
 #we can separate data by region and data by each country
 land_use_by_region<- land_use_clean%>%
-  filter(is.na(code))%>%
+  filter(is.na(code)||entity=="World")%>%
   select(-code,-tot_pop)
 
 land_use_clean<-land_use_clean%>%
@@ -107,6 +200,13 @@ land_use_clean%>%
   geom_point(size=0.1)+
   ggtitle("Cereal Yield Index vs Change in Land Area")+
   facet_wrap(~entity)
+
+
+land_use_clean%>%
+  filter(entity=="Belize")%>%
+  ggplot(aes(cereal_yield_idx, land_area_change))+
+  geom_point(size=0.1)+
+  ggtitle("Cereal Yield Index vs Change in Land Area")
 
 ##########################
 ##### Visualizations #####

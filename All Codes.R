@@ -27,9 +27,21 @@ str(arable_land)
 ### Fertilizer
 str(fertilizer)
 
-
 ### Tractors
 str(tractors)
+#Change column name 
+colnames(tractors)<- c("entity", "code", "year", "tractors_per_100", "cereal_yield", "total_population")
+
+#split into region and countries
+tractors_region<- tractors%>%
+  filter(is.na(code))
+
+tractors_country<- tractors%>%
+  filter(!is.na(code))
+
+ggplot(tractors_region, aes(tractors_per_100, cereal_yield)) +
+  geom_point()+
+  facet_wrap(~entity)
 
 
 ### Key Crop Yields

@@ -27,8 +27,94 @@ str(arable_land)
 ### Fertilizer
 str(fertilizer)
 
+fertilizer%>% #Entity, year is our primary key/foreign key 
+  count(Entity, Year)%>%
+  filter(n>1)
+
+everything<-full_join(fert_arable, land_use_clean)
+everything%>%
+  mutate(arable_land_100=arable_land*100)%>%
+  ggplot(aes(x=year))+
+  geom_line(aes(y=cereal_yield_idx, color = "red"))+
+  #geom_line(aes(y=nitrogen_fertilizer, color = "blue"))+
+  geom_line(aes(y=arable_land, color = "black"))+
+  geom_line(aes(y=land_area_change, color = "green"))+
+  #geom_line(aes(y=tot_pop, color = "orange"))+
+  facet_wrap(~entity)
+
+everything_countries<-everything%>%
+  fitler(!is.na(code))
+everything_regions<- everything%>%
+  filter(is.na(code))
+
+everything%>%
+  filter()
+
+
+fert_arable<-full_join(fertilizer, arable_land)
+colnames(fert_arable)<- c("entity", "code", "year", "cereal_yield", "nitrogen_fertilizer", "arable_land")
+
+fert_arable_countries<-fert_arable%>%
+  filter(!is.na(code))
+
+fert_arable_region<-fert_arable%>%
+  filter(is.na(code))
+
+fert_arable_region%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(nitrogen_fertilizer,cereal_yield))+
+  geom_point()+
+  ggtitle("Cereal Yield Index vs Nitrogen Fertilizer")+
+  facet_wrap(~entity)
+
+fert_arable_countries%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(nitrogen_fertilizer,cereal_yield))+
+  geom_point()+
+  ggtitle("Cereal Yield Index vs Nitrogen Fertilizer")+  #filter by range of nitrogen fertilizer 
+  facet_wrap(~entity)
+
+fert_arable_region%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(area = nitrogen_fertilizer,fill = entity))+
+  geom_treemap()+
+  ggtitle("Cereal Yield Index vs Nitrogen Fertilizer")+
+  scale_fill_viridis_d()
+
+fert_arable_countries%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(year, nitrogen_fertilizer, fill = cereal_yield))+
+  geom_tile()+
+  ggtitle("Cereal Yield Index vs Nitrogen Fertilizer")+
+  facet_wrap(~entity)+
+  scale_fill_viridis_c()
+
+fert_arable_region%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(year, nitrogen_fertilizer, fill = cereal_yield))+
+  geom_tile()+
+  ggtitle("Cereal Yield Index vs Nitrogen Fertilizer")+
+  scale_fill_viridis_c()
+  facet_wrap(~entity)
+
+
+fert_arable_region%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(arable_land,cereal_yield))+
+  geom_point()+
+  ggtitle("Cereal Yield Index vs Arable Land")+
+  facet_wrap(~entity)
+
+fert_arable_countries%>%
+  mutate(entity = as.factor(entity))%>%
+  ggplot(aes(arable_land,cereal_yield))+
+  geom_point()+
+  ggtitle("Cereal Yield Index vs Arable Land")+
+  facet_wrap(~entity)
+
 ### Tractors
 str(tractors)
+
 #Change column name 
 colnames(tractors)<- c("entity", "code", "year", "tractors_per_100", "cereal_yield", "total_population")
 
@@ -42,7 +128,6 @@ tractors_country<- tractors%>%
 ggplot(tractors_region, aes(tractors_per_100, cereal_yield)) +
   geom_point()+
   facet_wrap(~entity)
-
 
 ### Key Crop Yields
 str(key_crop_yields)
@@ -114,7 +199,8 @@ key_crop_yields_region%>%
   geom_tile()+
   geom_vline(xintercept = 1990, color = "red")+
   geom_vline(xintercept = 2004, color = "red")+
-  scale_fill_viridis_c()
+  scale_fill_viridis_c()+
+  theme_
 
 key_crop_yields_countries%>%
   filter(!is.na(`soybeans(tpha)`))%>%
@@ -170,7 +256,7 @@ land_use_clean<-land_use%>%
 
 #More NA values 
 view(land_use_clean%>%
-       filter(is.na(code)))   #NA in tot_pop and code occurs for entities that are not countries, but a region/continent
+  filter(is.na(code)))   #NA in tot_pop and code occurs for entities that are not countries, but a region/continent
 
 #we can separate data by region and data by each country
 land_use_by_region<- land_use_clean%>%

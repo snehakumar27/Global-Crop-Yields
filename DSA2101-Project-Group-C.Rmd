@@ -19,7 +19,7 @@ library(RColorBrewer)
 ```
 
 ## Global Crop Yield
-![Source: https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-01/readme.md](TidyTuesday_Global_Crop_Yield.png)
+![Source: https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-01/readme.md](Images/TidyTuesday_Global_Crop_Yield.png)
 
 By
 Cynthia Oo , 
@@ -174,7 +174,7 @@ The summary tables reveal that there is an overall increase in maize, soybeans, 
 
 
 ## 3. Question 1 - What factors could affect global crop yield? 
-![Source: https://unsplash.com/photos/zwZusrYAGoM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink ](Factors_Crop_Yield.jpg)
+![Source: https://unsplash.com/photos/zwZusrYAGoM?utm_source=unsplash&utm_medium=referral&utm_content=creditShareLink ](Images/Factors_Crop_Yield.jpg)
 
 ### 3.1 Introduction
 To answer this question, we first explore the relationships between global cereal crop yield (includes crops such as rice, wheat, maize, and barley) and factors such as the usage of arable land, nitrogen fertilizers, land use, tractors, and population across the world. Thereafter, we investigate the influence of environmental factors such as drastic weather conditions, as well as international political events that could impact global crop yield and hence affect our world food security.
@@ -365,7 +365,7 @@ In conclusion, factors such as arable land, nitrogen fertilizers, land use, trac
 
 ## 4. Question 2 Did the influence of biofuel affect the crop yield?
 
-![Source: https://www.thoughtco.com/the-pros-and-cons-of-biofuels-1203797 ](BioFuel.jpg)
+![Source: https://www.thoughtco.com/the-pros-and-cons-of-biofuels-1203797 ](Images/BioFuel.jpg)
 
 ### 4.1 Introduction
 Maize, wheat and soybean are three types of biofuel crops commonly used around the world. Maize and wheat produce bioethanol while soybean is used for the production of biodiesel. The trends of these crops are explored using the `key_crop_yield` dataset. Since resources are scarce, it is interesting to see how some regions choose to produce more crops for biofuel instead of food consumption in order to generate more income.

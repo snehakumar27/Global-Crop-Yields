@@ -5,4 +5,5 @@ The project is based on the Global Crop Yield datasets from Github's Tidy Tuesda
 The project aims to create a greater appreciation of our food source by analyzing and explore the trends in the yields of various types of crops across the years 
 as well as discovering how they could be profoundly affected by economic, political, and ecological factors. 
 
-This project is created by Matthias Koh, Sneha Kumar, Raphael Teng and Cynthia Oo
+This project is created by Matthias Koh, Sneha Kumar, Raphael Teng and Cynthia Oo.
+*Please do not copy*

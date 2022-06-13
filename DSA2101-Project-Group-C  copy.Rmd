@@ -21,12 +21,11 @@ library(RColorBrewer)
 ## Global Crop Yield
 ![Source: https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-09-01/readme.md](TidyTuesday_Global_Crop_Yield.png)
 
-By Group C 
-
-Cynthia Oo | A0223150Y, 
-Matthias Koh Yong An | A0216286B, 
-Raphael Teng Yao Wei | A0216309J, 
-Sneha Kumar | A0219926U
+By
+Cynthia Oo , 
+Matthias Koh Yong An, 
+Raphael Teng Yao Wei, 
+Sneha Kumar
 
 ## 1. Introduction
 
